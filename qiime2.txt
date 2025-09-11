@@ -1,0 +1,10 @@
+seqtk subseq bac_rep.fa bacasv_list.txt > bacteria_rep.fa
+
+conda activate qiime2-2021.11
+
+time qiime tools import --input-path bacteria_rep.fa --output-path bin_sequences.qza --type 'FeatureData[Sequence]'
+time qiime alignment mafft --i-sequences bin_sequences.qza --o-alignment bin_aligned-rep-seqs.qza
+time qiime phylogeny fasttree --i-alignment bin_aligned-rep-seqs.qza --o-tree bin_fasttree-tree.qza
+time qiime tools export --input-path bin_fasttree-tree.qza --output-path bac_test_tree
+
+
